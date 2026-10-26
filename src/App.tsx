@@ -219,7 +219,7 @@ function WorkspaceApp({ user, onSignOut, demoMode = false, onExitDemo }: { user:
   return (
     <div className="app-shell">
       <aside className={"sidebar " + (mobileNav ? "sidebar-open" : "")}>
-        <div className="brand"><div className="brand-mark"><BrainCircuit size={22}/></div><div><strong>GapFinder<span> AI</span></strong><small>STUDY WITH DIRECTION</small></div><button className="icon-btn close-nav" onClick={() => setMobileNav(false)} aria-label="Close menu"><X size={18}/></button></div>
+        <div className="brand"><div className="brand-mark"><Sparkles size={22}/></div><div><strong>GapFinder<span> AI</span></strong><small>LEARN · MAP · GROW</small></div><button className="icon-btn close-nav" onClick={() => setMobileNav(false)} aria-label="Close menu"><X size={18}/></button></div>
         <div className="workspace-label">WORKSPACE</div>
         <nav>{navItems.map(item => { const Icon = item.icon; return <button key={item.name} onClick={() => go(item.name)} className={"nav-item " + (page === item.name ? "active" : "")}><Icon size={18}/><span>{item.name}</span>{item.name === "Diagnostic quiz" && <span className="nav-dot"/>}</button>; })}</nav>
         <div className="sidebar-bottom"><div className="focus-card"><div className="focus-icon"><Zap size={17}/></div><strong>Small steps, big progress.</strong><p>Your next session can start with just 15 focused minutes.</p><button onClick={() => go("Revision plan")}>View my plan <ChevronRight size={15}/></button></div><div className="profile"><div className="avatar">S</div><div className="profile-copy"><strong>{user?.email ? user.email.split("@")[0] : "Student workspace"}</strong><small>{user ? "Synced account" : "Demo account"}</small></div><span className="status-dot"/></div></div>
@@ -296,7 +296,7 @@ function AuthGate() {
       setBusy(false);
     }
   };
-  if (!ready) return <div className="auth-loading"><div className="brand-mark"><BrainCircuit size={22}/></div><p>Preparing your study space…</p></div>;
+  if (!ready) return <div className="auth-loading"><div className="brand-mark"><Sparkles size={22}/></div><p>Preparing your study space…</p></div>;
   if (demoMode) return <WorkspaceApp user={null} onSignOut={() => {}} demoMode onExitDemo={() => setDemoMode(false)} />;
   if (!supabase) return <WorkspaceApp user={null} onSignOut={() => {}} />;
   if (user) return <WorkspaceApp user={user} onSignOut={() => { void signOut(); }} />;
