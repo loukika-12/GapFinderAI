@@ -6,7 +6,7 @@ A welcoming study companion that helps learners organize course materials, disco
 - Responsive dashboard with overview, materials, topic map, diagnostic quiz, revision plan, and study assistant.
 - Supabase email/password authentication plus a one-click demo workspace that does not require an account.
 - Per-user persistent workspace and study activity, protected by Row Level Security (RLS).
-- Text/Markdown notes and PDF file listing. **PDF text extraction is not implemented**; paste notes or use TXT/Markdown for note analysis.
+- Text/Markdown notes and PDF file listing, with material-name search and Markdown note export. **PDF text extraction is not implemented**; paste notes or use TXT/Markdown for note analysis.
 - Accessible forms, mobile navigation, helpful feedback, and clear labels.
 
 ## Stack
