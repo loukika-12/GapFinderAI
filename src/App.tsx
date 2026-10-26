@@ -35,7 +35,7 @@ const navItems = [
   { name: "Study assistant", icon: MessageCircle },
 ];
 
-function WorkspaceApp({ user, onSignOut }: { user: User | null; onSignOut: () => void }) {
+function WorkspaceApp({ user, onSignOut, demoMode = false, onExitDemo }: { user: User | null; onSignOut: () => void; demoMode?: boolean; onExitDemo?: () => void }) {
   const [page, setPage] = useState("Overview");
   const [mobileNav, setMobileNav] = useState(false);
   const [materialName, setMaterialName] = useState("Introduction to Learning");
@@ -226,7 +226,7 @@ function WorkspaceApp({ user, onSignOut }: { user: User | null; onSignOut: () =>
       </aside>
       {mobileNav && <button className="nav-overlay" onClick={() => setMobileNav(false)} aria-label="Close navigation"/>}
       <main className="main">
-        <header className="topbar"><div className="topbar-left"><button className="icon-btn menu-btn" onClick={() => setMobileNav(true)} aria-label="Open menu"><Menu size={20}/></button><span className="breadcrumb">Workspace <ChevronRight size={14}/> <strong>{page}</strong></span></div><div className="topbar-right"><span className="live-pill"><span/> {user ? "Cloud sync on" : "Local demo"}</span><button className="icon-btn" title="Help" onClick={() => showNotice("Use the left navigation to explore the demo.")}><CircleHelp size={18}/></button>{user && <button className="signout-btn" onClick={onSignOut}>Sign out</button>}<div className="avatar small-avatar">{user?.email?.charAt(0).toUpperCase() || "S"}</div></div></header>
+        <header className="topbar"><div className="topbar-left"><button className="icon-btn menu-btn" onClick={() => setMobileNav(true)} aria-label="Open menu"><Menu size={20}/></button><span className="breadcrumb">Workspace <ChevronRight size={14}/> <strong>{page}</strong></span></div><div className="topbar-right"><span className="live-pill"><span/> {user ? "Cloud sync on" : "Local demo"}</span><button className="icon-btn" title="Help" onClick={() => showNotice("Use the left navigation to explore the demo.")}><CircleHelp size={18}/></button>{user && <button className="signout-btn" onClick={onSignOut}>Sign out</button>}{demoMode && <button className="signout-btn" onClick={onExitDemo}>Exit demo</button>}<div className="avatar small-avatar">{user?.email?.charAt(0).toUpperCase() || "S"}</div></div></header>
         <div className="page-wrap">
           {notice && <div className="toast"><Check size={16}/>{notice}<button onClick={() => setNotice("")} aria-label="Dismiss"><X size={15}/></button></div>}
           {page === "Overview" && <Overview uploaded={uploaded} score={submitted ? score : null} topics={topics} onGo={go} completed={completed}/>}
@@ -252,6 +252,7 @@ function Stat({icon,label,value,hint,color}:{icon:React.ReactNode;label:string;v
 
 function AuthGate() {
   const [user, setUser] = useState<User | null>(null);
+  const [demoMode, setDemoMode] = useState(false);
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
@@ -296,6 +297,7 @@ function AuthGate() {
     }
   };
   if (!ready) return <div className="auth-loading"><div className="brand-mark"><BrainCircuit size={22}/></div><p>Preparing your study space…</p></div>;
+  if (demoMode) return <WorkspaceApp user={null} onSignOut={() => {}} demoMode onExitDemo={() => setDemoMode(false)} />;
   if (!supabase) return <WorkspaceApp user={null} onSignOut={() => {}} />;
   if (user) return <WorkspaceApp user={user} onSignOut={() => { void signOut(); }} />;
   return (
