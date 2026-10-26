@@ -152,7 +152,7 @@ function WorkspaceApp({ user, onSignOut }: { user: User | null; onSignOut: () =>
         const { error } = await supabase.from("materials").upsert({
           user_id: user.id,
           name: safeName,
-          mime_type: /\\.pdf$/i.test(safeName) ? "application/pdf" : "text/plain",
+          mime_type: "text/plain",
           size_bytes: Math.min(sizeBytes, 10485760),
           storage_path: storagePath,
           content,
