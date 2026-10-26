@@ -312,6 +312,9 @@ function AuthGate() {
         </form>
         {feedback && <div className="auth-feedback" role="status">{feedback}</div>}
         <p className="auth-switch">{mode === "signin" ? "New to GapFinder AI?" : "Already have an account?"} <button onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setFeedback(""); }}>{mode === "signin" ? "Create account" : "Sign in"}</button></p>
+        <div className="auth-divider"><span>OR</span></div>
+        <button className="secondary-btn demo-login-btn" type="button" onClick={() => { setFeedback(""); setDemoMode(true); }}>Continue with demo workspace <ChevronRight size={16}/></button>
+        <p className="demo-login-note">Try the dashboard without signing in. Demo progress stays in this browser.</p>
         <div className="auth-security"><Check size={15}/> Private workspace · Supabase-secured account data</div>
       </section>
       <aside className="auth-aside">
