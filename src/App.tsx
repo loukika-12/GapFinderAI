@@ -97,9 +97,11 @@ function WorkspaceApp({ user, onSignOut }: { user: User | null; onSignOut: () =>
       assistantHistory: assistantHistory.slice(-30),
     };
     if (user && supabase) {
+      const client = supabase;
+      const currentUser = user;
       const timer = window.setTimeout(async () => {
-        const { error } = await supabase.from("study_workspaces").upsert({
-          user_id: user.id,
+        const { error } = await client.from("study_workspaces").upsert({
+          user_id: currentUser.id,
           workspace,
           updated_at: new Date().toISOString(),
         }, { onConflict: "user_id" });
@@ -271,6 +273,7 @@ function AuthGate() {
     });
     return () => { alive = false; subscription.unsubscribe(); };
   }, []);
+  const signOut = async () => { if (supabase) await supabase.auth.signOut(); };
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!supabase) return;
@@ -294,7 +297,7 @@ function AuthGate() {
   };
   if (!ready) return <div className="auth-loading"><div className="brand-mark"><BrainCircuit size={22}/></div><p>Preparing your study space…</p></div>;
   if (!supabase) return <WorkspaceApp user={null} onSignOut={() => {}} />;
-  if (user) return <WorkspaceApp user={user} onSignOut={() => { void supabase.auth.signOut(); }} />;
+  if (user) return <WorkspaceApp user={user} onSignOut={() => { void signOut(); }} />;
   return (
     <main className="auth-shell">
       <section className="auth-card">
