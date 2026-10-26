@@ -33,3 +33,8 @@ This repository includes `render.yaml`. Connect `loukika-12/GapFinderAI` in Rend
 
 ## Data and privacy
 Workspace rows and activity are scoped to the authenticated Supabase user. RLS policies enforce this in the database. Do not upload sensitive documents. Only the user's notes and workspace JSON are stored; uploaded binary files are not uploaded to Supabase Storage. Built-in diagnostic questions and sample topic estimates are illustrative unless replaced with course-specific questions.
+
+
+## Complete project documentation
+
+See [docs/PROJECT_DOCUMENTATION.md](docs/PROJECT_DOCUMENTATION.md) for the full project report, problem statement, objectives, feature status, architecture diagrams, RAG pipeline, AI workflow, database model, security, setup, deployment, evaluation plan, limitations, and roadmap.
