@@ -314,9 +314,13 @@ function AuthGate() {
         </form>
         {feedback && <div className="auth-feedback" role="status">{feedback}</div>}
         <p className="auth-switch">{mode === "signin" ? "New to GapFinder AI?" : "Already have an account?"} <button onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setFeedback(""); }}>{mode === "signin" ? "Create account" : "Sign in"}</button></p>
-        <div className="auth-divider"><span>OR</span></div>
-        <button className="secondary-btn demo-login-btn" type="button" onClick={() => { setFeedback(""); setDemoMode(true); }}>Continue with demo workspace <ChevronRight size={16}/></button>
-        <p className="demo-login-note">Try the dashboard without signing in. Demo progress stays in this browser.</p>
+        <div className="demo-credentials" aria-label="Demo login credentials">
+          <div className="demo-credentials-heading"><Sparkles size={15}/> Demo credentials</div>
+          <div className="demo-credential-row"><span>Username</span><strong>demo</strong></div>
+          <div className="demo-credential-row"><span>Password</span><strong>demo1234</strong></div>
+          <p className="demo-login-note">For preview access only. No account, email confirmation, or authorization is needed.</p>
+          <button className="secondary-btn demo-login-btn" type="button" onClick={() => { setEmail("demo"); setPassword("demo1234"); setFeedback(""); setDemoMode(true); }}>Login directly as demo <ChevronRight size={16}/></button>
+        </div>
         <div className="auth-security"><Check size={15}/> Private workspace · Supabase-secured account data</div>
       </section>
       <aside className="auth-aside">
