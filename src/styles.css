@@ -68,3 +68,10 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline-color:#7
 .bottom-banner{background:linear-gradient(110deg,#f0edff,#edf9f6);border-color:#dddff3}
 .disclaimer{color:#8590a5}
 @media(max-width:900px){.sidebar{background:#fff}.topbar{background:rgba(255,255,255,.94)}}
+
+
+/* Materials productivity controls */
+.materials-search-label{display:block;margin-top:18px;margin-bottom:7px;color:var(--muted);font-size:11px;font-weight:700}
+.materials-search{width:100%;margin-bottom:10px}
+.empty-search{padding:16px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:12px;line-height:1.6}
+.export-notes-btn{margin-top:14px;width:100%;justify-content:center;gap:8px}
